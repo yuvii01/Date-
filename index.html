@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        *{
+            font-family: sans-serif;
+        }
+        img{
+            opacity:.8;
+        }
+    </style>
+</head>
+<body class="bg-red-200 w-screen  h-screen">
+    <div class="h-screen w-screen">
+<!-- <div class="absolute  z-[-1] top-[100px] right-8 rotate-45">
+    <img src="/1.png" alt="" class="h-[150px]">
+</div>
+
+
+<div class="absolute z-[-1] top-32 right-80 -rotate-12">
+    <img src="/2.png" alt="" class="h-[250px] opacity-50">
+</div>
+
+
+<div class="absolute z-[-1] top-3/4 left-1/3 rotate-12">
+    <img src="/3.png" alt="" class="h-[250px]">
+</div>
+<div class="absolute z-[-1] top-28 left-80 -rotate-6">
+    <img src="/4.png" alt="" class="h-[250px] opacity-50">
+</div>
+<div class="absolute z-[-1] top-2/4 -rotate-6">
+    <img src="/5.png" alt="" class="h-[250px]">
+</div>
+<div class="absolute z-[-1] top-3/4 right-28 -rotate-45">
+    <img src="/6.png" alt="" >
+</div>
+<div class="absolute z-[-1] top-2/4 right-2/4 rotate-45">
+    <img src="/7.png" alt="" class="opacity-50">
+</div>
+<div class="absolute z-[-1] top-12 left-0 -rotate-45">
+    <img src="/8.png" alt="">
+</div> -->
+<div class="font-semibold absolute text-xl  top-[30px] z-50 ps-[50px]">
+
+</div>
+
+<div class="font-black text-6xl  text-center px-10 py-[250px] mx-auto ">
+Up for a Date ?
+
+</div>
+
+<div class=" lg:grid grid-cols-2 gap-10">
+    <div class="absolute top-[500px] left-[50px]  ">
+        <button class="h-[50px] w-[120px] bg-[red] text-[white] font-black"><a href="/hannnn.html">Yes</a> </button>
+        </div>
+        <div class="dingu absolute top-[500px] right-[50px] duration-500">
+            <button id="nah" class="h-[50px] w-[120px] bg-[red] text-[white] font-black duration-300">Nah</button>
+            </div>
+</div>
+
+
+<!-- 
+ -->
+
+    </div>
+    <script>
+        var no = document.getElementById("nah");
+        var div = document.querySelector(".dingu");
+        let count = 0;
+        no.addEventListener(
+            "click",
+            function(){
+
+                count++;
+                if(count>6){
+                    count=count-6;
+                }
+              else if(count==1){
+              
+div.style.top="700px";
+div.style.right="220px";}
+else if(count ==2){
+    div.style.top="100px";
+div.style.right="310px";
+}
+else if(count ==3){
+    div.style.top="200px";
+div.style.right="0px";
+}
+else if(count==4){
+    div.style.top="500px";
+div.style.right="100px";
+}
+else if(count==5){
+    div.style.top="800px";
+div.style.right="300px";
+}
+
+else if(count==6){
+    div.style.top="300px";
+div.style.right="20px";
+}
+            }
+        )
+    </script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        *{
+            font-family: sans-serif;
+            margin: 0px;
+            padding: 0px;
+        }
+
+        .video-container {
+        position: relative;
+        width: 100%;
+        height: 100vh; /* Set the height to 100% of the viewport height */
+        overflow: hidden;
+    }
+
+    .video {
+        position: absolute;
+        top: 0;
+        left: 0;
+    
+        height: 100%;
+        object-fit: cover; /* Ensure the video covers the container */
+    }
+    </style>
+</head>
+<body>
+    <div class=" h-full w-full">
+        
+        
+
+
+
+
+        <div class="video-container">
+            <video class="video" src="/videoplayback.mp4" autoplay loop playsinline></video>
+        </div>
+
+        
+
+
+
+
+
+        <div class="font-bold fixed text-white top-[40px] left-[40px] text-2xl">
+    
+ </div>
+
+        <div class=" fixed font-black text-white top-2/4 left-[10px] text-4xl">
+        100% saying <br> This will be US :)
+       
+    </div>
+</body>
+</html>

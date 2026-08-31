@@ -6,17 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>North Indian Date</title>
     <script src="https://cdn.tailwindcss.com"></script>
-
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        * {
-            font-family: sans-serif;
-        }
-
-        img {
-            opacity: .8;
-        }
-
         body {
+            font-family: 'Outfit', sans-serif;
             background-image: url("background.jpg");
             background-size: cover;
             background-position: center;
@@ -24,67 +17,85 @@
             height: 100vh;
             width: 100vw;
             overflow: hidden;
+            margin: 0;
+        }
+
+        .glass-panel {
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        .btn {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .moving-btn {
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
     </style>
 </head>
 
 <body>
     <!-- Dark overlay for readability -->
-    <div class="h-screen w-screen bg-black/40 relative">
+    <div class="h-screen w-screen bg-black/40 relative flex flex-col items-center justify-center p-6">
 
-        <div class="font-black text-5xl text-center px-10 py-[250px] mx-auto text-white">
-            Lesssgooo for a North Indian food date Kanishkaa?
-            <br>
-            — UV
+        <div class="glass-panel rounded-3xl p-8 md:p-12 max-w-3xl text-center mb-16 animate-fade-in-down">
+            <h1 class="font-black text-4xl md:text-6xl text-white drop-shadow-xl leading-tight mb-4">
+                Should we gooo for a North Indian food date Kanishkaa? 🥘
+            </h1>
+            <p class="text-2xl text-rose-300 font-bold italic tracking-wide">
+                — UV
+            </p>
         </div>
 
-        <div class="lg:grid grid-cols-2 gap-10">
-            <div class="absolute top-[500px] left-[50px]">
-                <button class="h-[50px] w-[120px] bg-red-600 text-white font-black">
-                    <a href="/hannnn.html">Yes</a>
-                </button>
-            </div>
+        <div class="flex flex-col sm:flex-row gap-6 relative z-10 w-full max-w-md justify-center items-center h-20">
+            <a href="./hannnn.html?play=true"
+                class="btn bg-gradient-to-br from-emerald-400 to-green-600 text-white font-black text-2xl py-4 px-12 rounded-full cursor-pointer text-center whitespace-nowrap z-40">
+                YES! 🥰
+            </a>
 
-            <div class="dingu absolute top-[500px] right-[50px] duration-500">
-                <button id="nah" class="h-[50px] w-[120px] bg-red-600 text-white font-black duration-300">
-                    Nah
-                </button>
-            </div>
+            <button id="nah"
+                class="btn moving-btn bg-gradient-to-br from-rose-500 to-red-600 text-white font-black text-2xl py-4 px-12 rounded-full cursor-pointer whitespace-nowrap z-50">
+                Nah 🙄
+            </button>
         </div>
 
     </div>
 
     <script>
-        var no = document.getElementById("nah");
-        var div = document.querySelector(".dingu");
-        let count = 0;
+        const noBtn = document.getElementById("nah");
 
-        no.addEventListener("click", function () {
-            count++;
-            if (count > 6) count = 1;
+        const moveButton = () => {
+            const windowWidth = window.innerWidth;
+            const windowHeight = window.innerHeight;
 
-            if (count == 1) {
-                div.style.top = "500px";
-                div.style.right = "220px";
-            } else if (count == 2) {
-                div.style.top = "100px";
-                div.style.right = "310px";
-            } else if (count == 3) {
-                div.style.top = "200px";
-                div.style.right = "0px";
-            } else if (count == 4) {
-                div.style.top = "500px";
-                div.style.right = "100px";
-            } else if (count == 5) {
-                div.style.top = "800px";
-                div.style.right = "300px";
-            } else if (count == 6) {
-                div.style.top = "300px";
-                div.style.right = "20px";
-            }
-        });
+            const btnWidth = noBtn.offsetWidth;
+            const btnHeight = noBtn.offsetHeight;
+
+            // Constrain movement within the viewport, leaving some padding
+            const padding = 20;
+            const randomX = Math.max(padding, Math.floor(Math.random() * (windowWidth - btnWidth - padding)));
+            const randomY = Math.max(padding, Math.floor(Math.random() * (windowHeight - btnHeight - padding)));
+
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = randomX + 'px';
+            noBtn.style.top = randomY + 'px';
+        };
+
+        // Move on both hover (desktop) and click (mobile)
+        noBtn.addEventListener("mouseover", moveButton);
+        noBtn.addEventListener("click", moveButton);
     </script>
-
 </body>
 
 </html>

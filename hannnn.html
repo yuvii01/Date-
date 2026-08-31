@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Food Video</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
 
   <style>
     * {
       margin: 0;
       padding: 0;
-      font-family: sans-serif;
+      font-family: 'Outfit', sans-serif;
     }
 
     body {
@@ -23,33 +25,98 @@
       width: 100vw;
       height: 100vh;
       overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     video {
       position: absolute;
-      inset: 0;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       width: 100%;
       height: 100%;
       object-fit: cover;
+      /* This makes it fully responsive on laptop and mobile */
     }
 
     .overlay {
       position: absolute;
       inset: 0;
-      background: rgba(0, 0, 0, 0.35);
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.2) 100%);
       z-index: 2;
     }
 
-    .content {
+    .content-box {
       position: absolute;
       z-index: 3;
-      color: white;
-      width: 100%;
+      bottom: 10%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 90%;
+      max-width: 800px;
       text-align: center;
-      top: 60%;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 2.5rem;
+      border-radius: 24px;
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+      animation: slideUp 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+      opacity: 0;
+    }
+
+    @keyframes slideUp {
+      from {
+        transform: translate(-50%, 50px);
+        opacity: 0;
+      }
+
+      to {
+        transform: translate(-50%, 0);
+        opacity: 1;
+      }
+    }
+
+    .content-title {
+      color: white;
       font-size: 2.5rem;
       font-weight: 900;
-      text-shadow: 0 4px 12px rgba(0, 0, 0, 0.7);
+      line-height: 1.2;
+      text-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+      margin-bottom: 1rem;
+    }
+
+    @media (min-width: 768px) {
+      .content-title {
+        font-size: 3.5rem;
+      }
+    }
+
+    .audio-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      z-index: 10;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      color: white;
+      padding: 10px 20px;
+      border-radius: 50px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .audio-btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: scale(1.05);
     }
   </style>
 </head>
@@ -58,20 +125,61 @@
 
   <div class="video-container">
 
-    <!-- SAME REPO VIDEO -->
-    <video autoplay muted loop playsinline preload="auto">
+    <!-- Start muted so it autoplays on ALL browsers and devices -->
+    <video id="bgVideo" autoplay muted loop playsinline preload="auto">
       <source src="./khana.mp4" type="video/mp4">
       Your browser does not support the video tag.
     </video>
 
     <div class="overlay"></div>
 
-    <div class="content">
-      How do you feel about a North Indian food date?<br>
-      — UV
+    <button id="audioBtn" class="audio-btn">
+      🔇 Tap to Unmute
+    </button>
+
+    <div class="content-box">
+      <div class="content-title">
+        Lessgooooo 😚
+      </div>
     </div>
 
   </div>
 
+  <script>
+    const video = document.getElementById('bgVideo');
+    const audioBtn = document.getElementById('audioBtn');
+
+    // Function to handle unmuting
+    const enableSound = () => {
+      video.muted = false;
+      audioBtn.innerHTML = '🔊 Sound On';
+      video.play().catch(e => {
+        // If the browser strictly blocks it, fallback to muted state
+        video.muted = true;
+        audioBtn.innerHTML = '🔇 Tap to Unmute';
+        console.log("Autoplay with sound blocked by browser policy");
+      });
+    };
+
+    // Handle Unmute/Mute toggle button
+    audioBtn.addEventListener('click', () => {
+      if (video.muted) {
+        enableSound();
+      } else {
+        video.muted = true;
+        audioBtn.innerHTML = '🔇 Tap to Unmute';
+      }
+    });
+
+    // Check if we navigated from the "YES" button (which adds ?play=true)
+    window.addEventListener('DOMContentLoaded', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get('play') === 'true') {
+        // Attempt to auto-unmute
+        enableSound();
+      }
+    });
+  </script>
 </body>
+
 </html>
